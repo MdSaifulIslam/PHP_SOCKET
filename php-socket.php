@@ -36,9 +36,7 @@ while (true) {
 	foreach ($newSocketArray as $newSocketArrayResource) {	
 		while(socket_recv($newSocketArrayResource, $socketData, 1024, 0) >= 1){
 			$socketMessage = $chatHandler->unseal($socketData);
-			$messageObj = json_decode($socketMessage);
-			
-			$chat_box_message = $chatHandler->createChatBoxMessage($messageObj->chat_user, $messageObj->chat_message);
+			$chat_box_message = $chatHandler->createChatBoxMessage($socketMessage);
 			$chatHandler->send($chat_box_message);
 			break 2;
 		}
